@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from .options import CalendarEventOptions
+from .options import CalendarEventOptions, CalendarReminderOptions
 
 
 class Calendar(ABC):
@@ -27,3 +27,8 @@ class Calendar(ABC):
 class CalendarEvent:
     def __init__(self, options: CalendarEventOptions) -> None:
         self.options: CalendarEventOptions = options
+
+
+class CalendarReminder:
+    def __init__(self, options: CalendarReminderOptions) -> None:
+        self.options: CalendarReminderOptions = options
