@@ -16,12 +16,17 @@ class Calendar(ABC):
     def is_authentificated(self):
         return self._is_authentificated
 
-    @abstractmethod
     def sync_calendar(self):
+        self.pull_calendar()
+        self.push_calendar()
+
+    @abstractmethod
+    def pull_calendar(self):
         pass
 
-    # TODO
-    # the rest
+    @abstractmethod
+    def push_calendar(self):
+        pass
 
 
 class CalendarEvent:
