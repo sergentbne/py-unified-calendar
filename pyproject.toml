@@ -7,6 +7,13 @@ requires-python = ">=3.12"
 dependencies = [
     "geopy>=2.5.0",
 ]
+authors = [
+  {name = "Louis Turpault", email = "louis.turpault@gmail.com"},
+]
+maintainers = [
+  {name = "Louis Turpault", email = "louis.turpault@gmail.com"},
+]
+license = "MIT"
 
 [dependency-groups]
 dev = [
@@ -51,3 +58,6 @@ exclude = [
 ]
 [tool.ruff.lint]
 fixable = ["I001"]
+
+[tool.setuptools]
+packages = ["unified_calendar"]
