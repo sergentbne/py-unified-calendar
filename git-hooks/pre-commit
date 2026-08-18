@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+echo "--- basedpyright ---"
+uv run basedpyright
+
+echo "--- ruff format ---"
+uv run ruff format .
+
+echo "--- ruff lint ---"
+uv run ruff check . --fix
+
+echo "--- pytest ---"
+uv run pytest

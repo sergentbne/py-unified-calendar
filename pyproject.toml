@@ -10,5 +10,44 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "basedpyright>=1.39.10",
     "pytest>=9.1.1",
+    "ruff>=0.16.3",
 ]
+[tool.basedpyright]
+exclude=["tests/*", "typings/*", ".venv/*", "**/.ruff_cache", ".git", ".pytest_cache", "**/__pycache__"]
+failOnWarnings=false
+
+[tool.ruff]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+	"tests",
+	"typings",
+]
+[tool.ruff.lint]
+fixable = ["I001"]
