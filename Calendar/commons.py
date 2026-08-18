@@ -1,39 +1,86 @@
 from abc import ABC, abstractmethod
 
+from Calendar.exceptions import ParserNotLoadedError
+from Calendar.parsers import EventParser, Parser, ReminderParser
+
 from .options import CalendarEventOptions, CalendarReminderOptions
+from .inner import CalendarReminder, CalendarEvent
 
 
 class Calendar(ABC):
-    def __init__(self, source: str | None = None) -> None:
+    def __init__(self, source: str | None = None, parser: Parser | None = None) -> None:
         self._source: str | None = source
         self._events: list[CalendarEvent] = []
+        self._reminders: list[CalendarReminder] = []
         self._is_authentificated: bool = False
+        self._loaded_parser: Parser | None = parser
 
     @abstractmethod
-    def authentificate(self):
+    def authentificate(self) -> None:
         pass
 
-    def is_authentificated(self):
-        return self._is_authentificated
+    @abstractmethod
+    def is_authentificated(self) -> bool:
+        pass
 
-    def sync_calendar(self):
+    def sync_calendar(self) -> None:
         self.pull_calendar()
         self.push_calendar()
 
     @abstractmethod
-    def pull_calendar(self):
+    def pull_calendar(self) -> None:
         pass
 
     @abstractmethod
-    def push_calendar(self):
+    def push_calendar(self) -> None:
         pass
 
+    def sync_reminders(self) -> None:
+        self.pull_reminders()
+        self.push_reminders()
 
-class CalendarEvent:
-    def __init__(self, options: CalendarEventOptions) -> None:
-        self.options: CalendarEventOptions = options
+    @abstractmethod
+    def pull_reminders(self) -> None:
+        pass
 
+    @abstractmethod
+    def push_reminders(self) -> None:
+        pass
 
-class CalendarReminder:
-    def __init__(self, options: CalendarReminderOptions) -> None:
-        self.options: CalendarReminderOptions = options
+    def sync_all(self) -> None:
+        self.pull_all()
+        self.push_all()
+
+    def pull_all(self) -> None:
+        self.pull_calendar()
+        self.pull_reminders()
+
+    def push_all(self) -> None:
+        self.push_calendar()
+        self.push_reminders()
+
+    @property
+    def parser(self) -> Parser:
+        if not self._loaded_parser:
+            raise ParserNotLoadedError()
+        return self._loaded_parser
+
+    @parser.setter
+    def load_parser(self, parser: Parser) -> None:
+        self._loaded_parser = parser
+
+    def add_event(self, event: CalendarEvent | object):
+        if isinstance(event, CalendarEvent):
+            self._events.append(event)
+        else:
+            assert isinstance(self.parser, EventParser)
+            parsed_event = self.parser.parse(event)
+            self._events.append(parsed_event)
+
+    def add_reminder(self, event: CalendarReminder | object):
+        if isinstance(event, CalendarReminder):
+            self._reminders.append(event)
+        else:
+            assert isinstance(self.parser, ReminderParser)
+            parsed_event = self.parser.parse(event)
+            self._reminders.append(parsed_event)

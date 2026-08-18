@@ -40,6 +40,17 @@ class InvalidAttachementsError(Exception):
         invalid_attachements: list[Path],
     ):
         super().__init__(
-            f"One or more than one attachement(s) is invalid: {', '.join(map(lambda x: str(x), invalid_attachements))}"
+            f"One or more than one attachement(s) is invalid: {', '.join(str(x) for x in invalid_attachements)}"
         )
         self.invalid_attachements = invalid_attachements
+
+
+@final
+class ParserNotLoadedError(Exception):
+    def __init__(
+        self,
+    ):
+        super().__init__(
+            "The parser was not loaded before trying to add a event/reminder to the calendar."
+            + " Consider adding it with the `load_parser` method or assign it at initialisation."
+        )

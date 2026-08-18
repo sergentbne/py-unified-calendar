@@ -94,6 +94,7 @@ class CalendarReminderOptions:
             return bool(re.fullmatch(EMAIL_VALIDATION_REGEX, email))
 
         def is_url_valid(url: str):
+            # Regex was the simplest, local first solution found.
             URL_VALIDATION_REGEX = r"^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,63}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$"
             return bool(re.fullmatch(URL_VALIDATION_REGEX, url))
 
