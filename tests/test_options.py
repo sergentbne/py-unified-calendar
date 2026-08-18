@@ -2,10 +2,13 @@ import datetime
 from pathlib import Path
 
 import pytest
-
-from Calendar.enums import CalendarEventImportance, CalendarEventRepeat
-from Calendar.exceptions import InvalidAttachementsError, InvalidEmailError, InvalidUrlError
-from Calendar.options import CalendarEventOptions, CalendarReminderOptions
+from unified_calendar.enums import CalendarEventImportance, CalendarEventRepeat
+from unified_calendar.exceptions import (
+    InvalidAttachementsError,
+    InvalidEmailError,
+    InvalidUrlError,
+)
+from unified_calendar.options import CalendarEventOptions, CalendarReminderOptions
 
 DUMMY_ATTACHMENT = Path(__file__).parent / "data" / "attachments" / "dummy.txt"
 
@@ -16,7 +19,9 @@ def dt():
 
 def test_event_options_minimal():
     start = dt()
-    opts = CalendarEventOptions(start=start, end=start + datetime.timedelta(hours=1), event_name="Meeting")
+    opts = CalendarEventOptions(
+        start=start, end=start + datetime.timedelta(hours=1), event_name="Meeting"
+    )
     assert opts.event_name == "Meeting"
     assert opts.all_day is False
     assert opts.repeat == CalendarEventRepeat.NONE

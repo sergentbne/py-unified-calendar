@@ -9,13 +9,13 @@ class Parser(ABC):
     def __init__(self) -> None:
         super().__init__()
 
-    @abstractmethod
     @staticmethod
+    @abstractmethod
     def parse(unparsed_data: object) -> object:
         pass
 
-    @abstractmethod
     @staticmethod
+    @abstractmethod
     def batch_parse(list_of_unparsed_data: Sequence[object]) -> Sequence[object]:
         pass
 
@@ -24,14 +24,14 @@ class ReminderParser(Parser, ABC):
     def __init__(self) -> None:
         super().__init__()
 
-    @abstractmethod
     @staticmethod
+    @abstractmethod
     @override
     def parse(unparsed_data: object) -> CalendarReminder:
         pass
 
-    @abstractmethod
     @staticmethod
+    @abstractmethod
     @override
     def batch_parse(
         list_of_unparsed_data: Sequence[object],
@@ -43,14 +43,14 @@ class EventParser(Parser, ABC):
     def __init__(self) -> None:
         super().__init__()
 
-    @abstractmethod
     @staticmethod
+    @abstractmethod
     @override
     def parse(unparsed_data: object) -> CalendarEvent:
         pass
 
-    @abstractmethod
     @staticmethod
+    @abstractmethod
     @override
     def batch_parse(list_of_unparsed_data: Sequence[object]) -> Sequence[CalendarEvent]:
         pass

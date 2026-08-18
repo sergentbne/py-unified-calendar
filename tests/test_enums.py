@@ -1,6 +1,5 @@
-import pytest
 
-from Calendar.enums import CalendarEventImportance, CalendarEventRepeat
+from unified_calendar.enums import CalendarEventImportance, CalendarEventRepeat
 
 
 def test_importance_members_order():

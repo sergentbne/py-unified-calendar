@@ -1,8 +1,7 @@
 from pathlib import Path
 
 import pytest
-
-from Calendar.exceptions import (
+from unified_calendar.exceptions import (
     InvalidAttachementsError,
     InvalidEmailError,
     InvalidUrlError,
@@ -28,7 +27,10 @@ def test_invalid_email_error(emails, expected):
 
 def test_location_not_found_error():
     err = LocationNotFoundError("Paris XX")
-    assert str(err) == "The requested location has not been found: Paris XX has not been found"
+    assert (
+        str(err)
+        == "The requested location has not been found: Paris XX has not been found"
+    )
     assert err.location == "Paris XX"
 
 

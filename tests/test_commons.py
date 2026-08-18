@@ -1,15 +1,28 @@
 import datetime
 
 import pytest
-
-from Calendar.commons import Calendar, CalendarEvent, CalendarReminder
-from Calendar.enums import CalendarEventRepeat
-from Calendar.options import CalendarEventOptions, CalendarReminderOptions
+from unified_calendar.commons import Calendar, CalendarEvent, CalendarReminder
+from unified_calendar.options import CalendarEventOptions, CalendarReminderOptions
 
 
 class ConcreteCalendar(Calendar):
     def authentificate(self):
         self._is_authentificated = True
+
+    def is_authentificated(self) -> bool:
+        return self._is_authentificated
+
+    def pull_calendar(self):
+        pass
+
+    def push_calendar(self):
+        pass
+
+    def pull_reminders(self):
+        pass
+
+    def push_reminders(self):
+        pass
 
     def sync_calendar(self):
         pass

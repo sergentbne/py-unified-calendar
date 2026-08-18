@@ -6,15 +6,15 @@ from typing import Any
 
 import geopy
 
+from .enums import (
+    CalendarEventImportance,
+    CalendarEventRepeat,
+)
 from .exceptions import (
     InvalidAttachementsError,
     InvalidEmailError,
     InvalidUrlError,
     LocationNotFoundError,
-)
-from .enums import (
-    CalendarEventRepeat,
-    CalendarEventImportance,
 )
 
 

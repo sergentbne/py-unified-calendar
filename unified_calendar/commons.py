@@ -1,9 +1,8 @@
 from abc import ABC, abstractmethod
 
-from Calendar.exceptions import ParserNotLoadedError
-from Calendar.parsers import EventParser, ReminderParser
-
+from .exceptions import ParserNotLoadedError
 from .inner import CalendarEvent, CalendarReminder
+from .parsers import EventParser, ReminderParser
 
 
 class Calendar(ABC):
