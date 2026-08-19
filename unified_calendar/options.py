@@ -55,11 +55,12 @@ class CalendarEventOptions:
                     ),
                 )
             )
-        if self.location:
-            geolocator = geopy.Nominatim()
-            found_location: Any | None = geolocator.geocode(self.location)
-            if found_location is None:
-                raise LocationNotFoundError(self.location)
+        # FIXME commented until good solution is found
+        # if self.location:
+        #     geolocator = geopy.Nominatim()
+        #     found_location: Any | None = geolocator.geocode(self.location)
+        #     if found_location is None:
+        #         raise LocationNotFoundError(self.location)
         if self.url and not is_url_valid(self.url):
             raise InvalidUrlError(self.url)
         if self.attachements and not all(x.exists() for x in self.attachements):
